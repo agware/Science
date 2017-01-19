@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>First Formula</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../scriptsShared/styles.css">
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="container">
+        <div id="animation"></div>
+        <div id="control"></div>
+    </div>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../scripts2d/ball.js" type="text/javascript"></script>
+<script src="../scripts2d/formula.js" type="text/javascript"></script>
+<script src="../scripts2d/drag.js" type="text/javascript"></script>
+<script src="../scripts2d/markPath.js" type="text/javascript"></script>
+<script src="../scripts2d/velocityArrows.js" type="text/javascript"></script>
+<script src="../scriptsShared/buttons.js" type="text/javascript"></script>
+<script src="../scriptsShared/radio.js" type="text/javascript"></script>
+<script src="../scriptsShared/utils.js" type="text/javascript"></script>
+
+<script>
+
+    var inputs = [{'id': 'u', 'name': 'u', 'val': [7, 12], 'measure': 'm/s', 'numDraggable': 2},
+                  {'id': 'a', 'name': 'a', 'val': [0, -9.8], 'measure': 'm/s²', 'numDraggable': 0}];
+    var heightInput = {'id': 'x0', 'val': [0,2]};
+    var vars = [{'id': 'u', 'val': [0,0]},
+                {'id': 'a', 'val': [0,0]},
+                {'id': 't', 'val': [0,0]},
+                {'id': 'x0', 'val': [0,0]},
+                {'id': 'xLim', 'val': [0,0]}];
+    var animation = {'start': Date.now(), 'mem': 0, 'state': false};
+
+    initSvg();
+    initControls();
+    initAnimation();
+
+    updateVars();
+
+    d3.timer(animateBall);
+
+    function initSvg () {
+        const height = 570;
+        const animationWidth = 700;
+        d3.select('div#animation').append('svg')
+            .attr('width', animationWidth)
+            .attr('height', height)
+            .attr('overflow', 'hidden')
+            .attr('id', 'animationSvg')
+            .style('border', 'solid black 1px');
+
+        const controlWidth = 200;
+        d3.select('div#control').append('svg')
+            .attr('width', controlWidth)
+            .attr('height', height)
+            .attr('overflow', 'hidden')
+            .attr('id', 'controlSvg')
+            .style('border', 'solid black 2px');
+    }
+
+    function initControls () {
+
+        initButtons();
+
+        const directionRadioOffset = 100;
+        d3.select('#controlSvg').append('g')
+            .attr('transform', 'translate(0,' + directionRadioOffset + ')')
+            .attr('id', 'directionRadioG');
+        initDirectionRadio();
+
+        const dragOffset = 220;
+        d3.select('#controlSvg').append('g')
+            .attr('transform', 'translate(0,' + dragOffset + ')')
+            .attr('id', 'inputsDragG');
+        initInputsDrag();
+
+        const formulaRadioOffset = parseInt(d3.select('#controlSvg').attr('height')) - 100;
+        d3.select('#controlSvg').append('g')
+            .attr('transform', 'translate(0,' + formulaRadioOffset + ')')
+            .attr('id', 'formulaRadioG');
+        initFormulaRadio();
+    }
+
+    function initAnimation () {
+
+        const ballRadius = 20;
+        const frameOffset = {'x': 50, 'y': parseInt(d3.select('#animationSvg').attr('height'))};
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + frameOffset.x + ',' + frameOffset.y + ')')
+            .attr('id', 'frameG');
+        d3.select('#frameG').append('g')
+            .attr('id', 'ballG');
+
+        const textTypes = {'top': 'v', 'bottom': 't'};
+        initCurtain(ballRadius, textTypes);
+        initBall(ballRadius);
+        initHeightDrag();
+
+        const formula = ['v', '=', 'u', '+', 'a', '•', 't'];
+        const textGap = [0, 30, 30, 32, 32, 28, 20];
+        const formulaOffset = {'x': 250, 'y': 70};
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + formulaOffset.x + ',' + formulaOffset.y + ')')
+            .attr('id', 'formulaG');
+        initFormula(formula, textGap);
+
+        initVelocityArrows();
+        clickHorizontal();
+
+    }
+
+    function updateVars () {
+
+        for (var i = 0; i < inputs.length; i++) {
+            var index = matchToObject(inputs[i].id, vars);
+            vars[index].val = inputs[i].val;
+        }
+
+        var index = matchToObject(heightInput.id, vars);
+        vars[index].val = heightInput.val;
+
+        var scalingFactor = d3.select('#ball').datum();
+        var horizontalLim = parseInt(d3.select('#animationSvg').attr('width'))/scalingFactor + heightInput.val[0];
+        var verticalLim =  -2*d3.select('#ball').attr('r')/scalingFactor - heightInput.val[1];
+        var xLimIndex = matchToObject('xLim', vars);
+        vars[xLimIndex].val = [horizontalLim, verticalLim];
+
+        updateBall();
+        updateCurtain();
+        updateVelocityArrows();
+        if(d3.select('#numbersRadioBand').classed('active')) {updateNumbers(); }
+    }
+
+
+</script>
+
+</body>
+</html>

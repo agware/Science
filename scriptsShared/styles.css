@@ -1,0 +1,69 @@
+circle, rect {
+    fill: #20948B;
+    fill-opacity: 1;
+}
+
+line {
+    stroke: #000;
+    stroke-width: 2px;
+}
+
+text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+    fill: #000;
+}
+
+#wrapper {
+    text-align: center;
+}
+
+#container {
+    display: inline-block;
+}
+
+#animation, #control {
+    float: left;
+    margin-right: 2px;
+}
+
+.clickable {
+    fill: #DE7A22;
+    cursor: pointer;
+}
+
+.split {
+    stroke: #808080;
+}
+
+.splitLine {
+    stroke-dasharray: 5, 5;
+}
+
+.greyArrow {
+    stroke: #696969;
+}
+
+.active {
+    stroke: #000;
+    stroke-opacity: 1;
+    stroke-width: 2px;
+}
+
+.hover {
+    fill: #C76D1E;
+}
+
+.shadow {
+    fill: #BCDEDC;
+}
+
+.shadow2 {
+    fill: #F5D7BC;
+}
+
+.hidden {
+    fill-opacity: 0;
+    stroke-opacity: 0;
+}

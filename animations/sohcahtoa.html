@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pythagoras</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../scriptsShared/styles.css">
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="container">
+        <div id="animation"></div>
+    </div>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../scripts1d/formula.js" type="text/javascript"></script>
+<script src="../scripts1d/triangle.js" type="text/javascript"></script>
+<script src="../scriptsShared/radio.js" type="text/javascript"></script>
+<script src="../scriptsShared/utils.js" type="text/javascript"></script>
+
+<script>
+
+    var inputs = [{'id': 'a', 'val': 160},
+                  {'id': 'o', 'val': 160}];
+    var vars = [{'id': 'a', 'val': 0},
+                {'id': 'o', 'val': 0},
+                {'id': 'h', 'val': 0},
+                {'id': 'θ', 'val': 0}];
+
+    initSvg();
+    initAnimation();
+    updateVars();
+
+    function initSvg () {
+        const height = 350;
+        const animationWidth = 550;
+        d3.select('div#animation').append('svg')
+            .attr('width', animationWidth)
+            .attr('height', height)
+            .attr('overflow', 'hidden')
+            .attr('id', 'animationSvg');
+    }
+
+    function initAnimation () {
+        const radioOffset = 60;
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(0,' + radioOffset + ')')
+            .attr('id', 'formulaRadioG');
+        initFormulaRadio();
+
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(0,' + (200) + ')')
+            .attr('id', 'trigRadioG');
+        initTrigRadio();
+
+        const formula = [['sin', '(', 'θ', ')', '=', 'o', '/', 'h'],
+                         ['cos', '(', 'θ', ')', '=', 'a', '/', 'h'],
+                         ['tan', '(', 'θ', ')', '=', 'o', '/', 'a']];
+        const textGap = [[0, 70, 21, 34, 25, 35, 35, 25],
+                         [0, 80, 21, 34, 25, 35, 35, 25],
+                         [0, 78, 21, 34, 25, 35, 35, 25]];
+        const formulaOffset = {'x': 180, 'y': 70};
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + formulaOffset.x + ',' + formulaOffset.y + ')')
+            .attr('id', 'formulaG');
+        initFormula(formula, textGap);
+
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + 200 + ',' + (d3.select('#animationSvg').attr('height')-20) + ')')
+            .attr('id', 'triangleG');
+        initTriangle();
+
+        clickSin();
+    }
+
+    function updateVars () {
+
+        var scalingFactor = d3.select('#triangleG').datum();
+
+        for (var i = 0; i < inputs.length; i++) {
+            var index = matchToObject(inputs[i].id, vars);
+            vars[index].val = Math.floor(inputs[i].val/scalingFactor);
+        }
+
+        var a = vars[matchToObject('a', vars)].val;
+        var o = vars[Math.max(matchToObject('b', vars), matchToObject('o', vars))].val;
+
+        var hIndex = Math.max(matchToObject('c', vars), matchToObject('h', vars));
+        vars[hIndex].val = Math.round(Math.sqrt(Math.pow(a, 2) + Math.pow(o, 2))*10)/10;
+
+        var thetaIndex = matchToObject('θ', vars);
+        if (thetaIndex >= 0) {
+            var angle = Math.atan(o/a)*(180/Math.PI);
+            vars[thetaIndex].val = Math.round(angle*10)/10;
+        }
+
+        updateTriangle();
+
+        if(d3.select('#numbersRadioBand').classed('active')) {updateNumbers(); }
+    }
+
+
+</script>
+
+</body>
+</html>

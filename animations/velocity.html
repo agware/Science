@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Velocity</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../scriptsShared/styles.css">
+
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="container">
+        <div id="animation"></div>
+    </div>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../scripts1d/drag.js" type="text/javascript"></script>
+<script src="../scripts1d/ball.js" type="text/javascript"></script>
+<script src="../scripts1d/distMarker.js" type="text/javascript"></script>
+<script src="../scriptsShared/utils.js" type="text/javascript"></script>
+
+<script>
+
+    var inputs = [{'id': 'u', 'name': 'velocity', 'val': 5, 'measure': 'm/s'}];
+    var vars = [{'id': 'u', 'val': 0},
+                {'id': 'a', 'val': 0},
+                {'id': 't', 'val': 0},
+                {'id': 'xLim', 'val': 0}];
+    var animation = {'start': Date.now(), 'mem': 0, 'state': true};
+
+    initSvg();
+    initAnimation();
+
+    updateVars();
+
+    d3.timer(animateBall);
+
+    function initSvg () {
+        const height = 350;
+        const animationWidth = 700;
+        d3.select('div#animation').append('svg')
+            .attr('width', animationWidth)
+            .attr('height', height)
+            .attr('overflow', 'hidden')
+            .attr('id', 'animationSvg');
+    }
+
+    function initAnimation() {
+        const dragOffset = 50;
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + dragOffset + ',' + dragOffset + ')')
+            .attr('id', 'dragG');
+        initDrag(inputs);
+
+        const ballRadius = 38;
+        const ballOffset = 180 - ballRadius;
+        d3.select('#animationSvg').append('g')
+            .attr('transform', 'translate(' + (-2*ballRadius) + ',' + (parseInt(d3.select('#animationSvg').attr('height')) - ballOffset) + ')')
+            .attr('id', 'ballG');
+        initBall(ballRadius);
+
+        initMarker();
+    }
+
+    function updateVars() {
+
+        for (var i = 0; i < inputs.length; i++) {
+            var index = matchToObject(inputs[i].id, vars);
+            vars[index].val = inputs[i].val;
+        }
+
+        var scalingFactor = d3.select('#ball').datum();
+        var index = matchToObject('xLim', vars);
+        vars[index].val = (parseInt(d3.select('#animationSvg').attr('width')) + 3*parseInt(d3.select('#ball').attr('r')))/scalingFactor;
+
+        updateMarker();
+        updateCurtain();
+    }
+
+
+</script>
+
+</body>
+</html>
