@@ -48,7 +48,7 @@
     d3.timer(animateBall);
 
     function initSvg () {
-        const height = 570;
+        const height = 600;
         const animationWidth = 700;
         d3.select('div#animation').append('svg')
             .attr('width', animationWidth)
@@ -100,7 +100,9 @@
             .attr('id', 'ballG');
 
         const textTypes = {'top': 'x', 'bottom': 't'};
-        initCurtain(ballRadius, textTypes);
+        const num = 10;
+        initCurtain(ballRadius, textTypes, num);
+
         d3.select('#ballG').append('line')
             .attr('transform', 'translate(0,' + ballRadius + ')')
             .attr('x2', d3.select('#animationSvg').attr('width'))
@@ -113,6 +115,7 @@
             .classed('split', true)
             .classed('splitLine', true)
             .classed('horizontal', true);
+
         initBall(ballRadius);
         initHeightDrag();
 
@@ -132,11 +135,11 @@
 
         for (var i = 0; i < inputs.length; i++) {
             var index = matchToObject(inputs[i].id, vars);
-            vars[index].val = inputs[i].val;
+            vars[index].val = [inputs[i].val[0], inputs[i].val[1]];
         }
 
         var index = matchToObject(heightInput.id, vars);
-        vars[index].val = heightInput.val;
+        vars[index].val = [heightInput.val[0], heightInput.val[1]];
 
         var scalingFactor = d3.select('#ball').datum();
         var horizontalLim = parseInt(d3.select('#animationSvg').attr('width'))/scalingFactor + heightInput.val[0];

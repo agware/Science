@@ -66,7 +66,6 @@ function animateBall () {
         var tempT = (Date.now() - animation.start) / 1000;
         var t = [tempT, tempT];
 
-
         var x = [0,0];
         var v = [0,0];
         var loc = [0,0];
@@ -74,39 +73,56 @@ function animateBall () {
         var tIndex = matchToObject('t', vars);
         var xIndex = matchToObject('x', vars);
         var vIndex = matchToObject('v', vars);
+        var tLimIndex = matchToObject('tLim', vars);
 
         for (var i = 0; i < u.length; i++) {
-            if (tIndex >= 0) {vars[tIndex].val[i] = Math.floor(t[i]*10)/10; }
+
+            if (tIndex >= 0) {vars[tIndex].val[i] = Math.round(t[i] * 10) / 10; }
 
             // x = ut + (1/2)at^2
             x[i] = (u[i] * t[i] + (1 / 2) * a[i] * Math.pow(t[i], 2));
-            if (xIndex >= 0) {vars[xIndex].val[i] = Math.floor(x[i]*10)/10; }
+            if (xIndex >= 0) {vars[xIndex].val[i] = Math.round(x[i] * 10)/ 10; }
 
             // v = u + at
-            v[i] = u[i] + a[i]*t[i];
-            if (vIndex >= 0) {vars[vIndex].val[i] =  a[i] >= 0 ? Math.floor(v[i]) : Math.ceil(v[i]); }
+            v[i] = u[i] + a[i] * t[i];
+            if (vIndex >= 0) {vars[vIndex].val[i] = Math.round(v[i]); }
 
             loc[i] = x[i] * scalingFactor;
-        }
 
+        }
 
         d3.select('#ball')
             .attr('cx', loc[0])
             .attr('cy', -loc[1]);
 
-        if(!d3.select('#formulaRadioG').selectAll('g').empty()) {
-            if(d3.select('#numbersRadioBand').classed('active')) {updateNumbers(); }
+
+
+        var limHit = false;
+        if (tLimIndex >= 0) {
+            limHit = tempT >= vars[tLimIndex].val[0];
+        } else {
+            limHit = loc[0] > xLim[0]*scalingFactor || loc[1] < xLim[1]*scalingFactor;
         }
 
-        if (loc[0] > xLim[0]*scalingFactor || loc[1] < xLim[1]*scalingFactor) {
+        if (limHit) {
             if (!d3.select('#pause').empty()) {
                 clickPause();
             }
+
+            d3.select('#ball')
+                .attr('cx', xLim[0]*scalingFactor)
+                .attr('cy', -xLim[1]*scalingFactor);
 
             setTimeout(function () {
                 resetBall(animation);
                 animation.start = Date.now();
             }, 500);
         }
+
+        if(!d3.select('#formulaRadioG').selectAll('g').empty()) {
+            if(d3.select('#numbersRadioBand').classed('active')) {
+                updateNumbers(); }
+        }
+
     }
 }

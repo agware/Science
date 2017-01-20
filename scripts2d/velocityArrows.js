@@ -85,8 +85,10 @@ function initVelocityArrows () {
 
 function updateVelocityArrows () {
     var u = vars[matchToObject('u', vars)].val;
-    var angle = Math.atan(u[1]/u[0])*180/Math.PI;
-    var vel = Math.sqrt(Math.pow(u[0], 2) + Math.pow(u[1], 2));
+    var x = u[0] ? u[0] : 0.001;
+    var y = u[1];
+    var angle = Math.atan(y/x)*180/Math.PI;
+    var vel = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 
     var scalingFactor = d3.select('#ball').datum()/4;
 

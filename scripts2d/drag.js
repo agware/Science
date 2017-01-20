@@ -7,15 +7,19 @@ function initInputsDrag () {
     for (var i = 0; i < inputs.length; i++) {
 
         const r = {'fixed': 8, 'draggable': 15};
-        const offset = {'x': 20, 'gap': 130, 'text': 50, 'arrow': 5, 'shift': 3};
+        const offset = {'x': 20, 'gap': 120/inputs.length + 80, 'text': 50, 'arrow': 5, 'shift': 3};
         const underline = {'x': 25, 'y': 10, 'len': 75};
-        const scalingFactor = 4;
+        var scalingFactor = 4;
 
         d3.select('#inputsDragG')
             .datum(scalingFactor)
             .append('g')
             .attr('transform',  'translate(' + offset.x + ',' + (i*offset.gap) + ')')
             .attr('id', inputs[i].id + 'G');
+
+        if (inputs[i].id == 'tLim') {
+            scalingFactor = scalingFactor*5;
+        }
 
         d3.select('#' + inputs[i].id + 'G').append('text')
             .attr('x', offset.text)
@@ -51,7 +55,9 @@ function initInputsDrag () {
                 .attr('transform', 'translate(' + (lineLen) + ',0)')
                 .attr('id', inputs[i].id + 'HorizontalDraggableG');
 
-            d3.select('#' + inputs[i].id + 'HorizontalDraggableG').selectAll('line')
+            d3.select('#' + inputs[i].id + 'HorizontalDraggableG').append('g')
+                .attr('id', inputs[i].id + 'HorizontalArrowHead')
+                .selectAll('line')
                 .data(d3.range(2))
                 .enter().append('line')
                 .attr('x2', -offset.arrow)
@@ -73,16 +79,19 @@ function initInputsDrag () {
         }
 
         function initVertical () {
-            const verticalOffset = {'x': 120, 'y': 80, 'shift': -50, 'text': 20};
+            const verticalOffset = {'x': 115, 'y': 80, 'text': 20};
             var lineLen = -inputs[i].val[1]*scalingFactor;
             var negArrow = lineLen > 0 ? 1 : 0;
+            var arrowShift = 0;
+            arrowShift -= inputs[i].id == 'a' ? 45 : 0;
+            arrowShift -= inputs[i].id == 'vLim' ? 30 : 0;
 
             d3.select('#' + inputs[i].id + 'G').append('g')
-                .attr('transform', 'translate(' + verticalOffset.x + ',' + (verticalOffset.y + verticalOffset.shift*negArrow) + ')')
+                .attr('transform', 'translate(' + verticalOffset.x + ',' + (verticalOffset.y + arrowShift) + ')')
                 .attr('id', inputs[i].id + 'VerticalG');
 
             d3.select('#' + inputs[i].id + 'VerticalG').append('text')
-                .attr('x', -verticalOffset.text)
+                .attr('x', -verticalOffset.text + (inputs[i].id == 'vLim' ? 23 : 0))
                 .attr('y', verticalOffset.text*(negArrow ? -0.2 : 1))
                 .attr('id', inputs[i].id + 'VerticalText')
                 .text(inputs[i].val[1] + inputs[i].measure);
@@ -95,7 +104,9 @@ function initInputsDrag () {
                 .attr('transform', 'translate(0,' + (lineLen) + ')')
                 .attr('id', inputs[i].id + 'VerticalDraggableG');
 
-            d3.select('#' + inputs[i].id + 'VerticalDraggableG').selectAll('line')
+            d3.select('#' + inputs[i].id + 'VerticalDraggableG').append('g')
+                .attr('id', inputs[i].id + 'VerticalArrowHead')
+                .selectAll('line')
                 .data(d3.range(2))
                 .enter().append('line')
                 .attr('x2', function (d) {return (d ? -1 : 1) * offset.arrow; })
@@ -163,10 +174,16 @@ function dragStart() {
 }
 
 function dragHorizontalUpdate () {
-    const lim = {'min': 0, 'max': 50};
-
     var id = d3.select(this).attr('id');
     id = id.substring(0, id.length - 'HorizontalDragBall'.length);
+
+    var lim = {'min': 0, 'max': 50};
+    if (id == 'tLim') {
+        var scalingFactor = d3.select('#inputsDragG').datum()*5;
+        var u = inputs[matchToObject('u', inputs)].val[1];
+        lim.min = Math.max(((10 - u)/(-9.8))*scalingFactor, 0);
+        lim.max = ((-10 - u)/(-9.8))*scalingFactor;
+    }
 
     var oldOffset = d3.select('#' + id + 'HorizontalDraggableG').attr('transform');
     oldOffset = parseInt(oldOffset.substring('translate('.length, oldOffset.length - ',0)'.length));
@@ -174,13 +191,28 @@ function dragHorizontalUpdate () {
     var tempInput = Math.max(Math.min(d3.event.x + oldOffset, lim.max), lim.min);
 
     dragUpdate(0, id, tempInput);
+
+    var tiedFlag = checkIfTied(id);
+    if(tiedFlag) {updateTiedInputs(0, id, tempInput); }
+
+    updateVars();
 }
 
 function dragVerticalUpdate () {
-    const lim = {'min': 0, 'max': 80};
 
     var id = d3.select(this).attr('id');
     id = id.substring(0, id.length - 'VerticalDragBall'.length);
+
+    var lim = {'min': 0, 'max': 80};
+    if (id == 'vLim') {
+        lim.min = -40;
+        lim.max = 40;
+    } else if (id == 'tLim') {
+        var scalingFactor = d3.select('#inputsDragG').datum()*5;
+        var u = inputs[matchToObject('u', inputs)].val[1];
+        lim.min = Math.max(((10 - u)/(-9.8))*scalingFactor, 0);
+        lim.max = ((-10 - u)/(-9.8))*scalingFactor;
+    }
 
     var oldOffset = d3.select('#' + id + 'VerticalDraggableG').attr('transform');
     oldOffset = parseInt(oldOffset.substring('translate(0,'.length, oldOffset.length - ')'.length));
@@ -188,6 +220,11 @@ function dragVerticalUpdate () {
     var tempInput = Math.max(Math.min(-(d3.event.y + oldOffset), lim.max), lim.min);
 
     dragUpdate(1, id, tempInput);
+
+    var tiedFlag = checkIfTied(id);
+    if(tiedFlag) {updateTiedInputs(1, id, tempInput); }
+
+    updateVars();
 }
 
 function dragUpdate(direction, id, input) {
@@ -199,13 +236,19 @@ function dragUpdate(direction, id, input) {
     d3.select('#' + id + directionName + 'DraggableG').attr('transform', transform);
 
     var scalingFactor = d3.select('#inputsDragG').datum();
-    input = Math.floor(input/scalingFactor);
-
+    if (id == 'tLim') {
+        scalingFactor = 5*scalingFactor;
+        input = Math.round(input*100/scalingFactor)/100;
+    } else if (id == 'vLim' && direction) {
+        input = Math.round(input*10/scalingFactor)/10;
+    } else {
+        input = Math.round(input/scalingFactor);
+    }
     var index = matchToObject(id, inputs);
     inputs[index].val[direction] = input;
     d3.select('#' + id + directionName + 'Text').text(input + inputs[index].measure);
-
-    updateVars();
+    console.log(d3.select('#' + id + directionName + 'ArrowHead').attr('id'));
+    d3.select('#' + id + directionName + 'ArrowHead').attr('transform', 'rotate(' + (input < 0 ? 180 : 0) + ')');
 }
 
 function dragHeightUpdate () {
@@ -227,5 +270,63 @@ function dragHeightUpdate () {
 
 function dragEnd() {
     d3.select(this).classed('active', false);
+}
+
+function checkIfTied (id) {
+    var ret = false;
+
+    if (id == 'u') {
+        ret = matchToObject('vLim', inputs) >= 0;
+    } else if (id == 'vLim') {
+        ret = matchToObject('tLim', inputs) >= 0;
+    } else if (id == 'tLim') {
+        ret = matchToObject('vLim', inputs) >= 0;
+    }
+
+    return ret;
+}
+
+function updateTiedInputs (direction, id, input) {
+    var scalingFactor = d3.select('#inputsDragG').datum();
+    var opDirection = direction ? 0 : 1;
+
+    if (id == 'u') {
+        var tempInput = Math.round(input/scalingFactor);
+        if (!direction) {
+            dragUpdate(direction, 'vLim', input);
+        } else {
+            var vLim = inputs[matchToObject('vLim', inputs)].val[direction];
+            if (vLim > tempInput) {
+                dragUpdate(direction, 'vLim', tempInput*scalingFactor);
+                vLim = tempInput;
+            }
+            // v=u+at
+            var a = -9.8;
+            var tLim = (vLim - tempInput)/a;
+            dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
+            dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
+        }
+    } else if (id == 'vLim') {
+        var tempInput = Math.round(input*10/scalingFactor)/10;
+        var u = inputs[matchToObject('u', inputs)].val[direction];
+        if (tempInput > u) {
+            dragUpdate(direction, 'vLim', u*scalingFactor);
+            tempInput = u;
+        }
+        var a = -9.8;
+        // v = u+at
+        var tLim = (tempInput - u)/a;
+        dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
+        dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
+
+    } else if (id == 'tLim') {
+        var tempInput = Math.round(input*100/(5*scalingFactor))/100;
+        dragUpdate(opDirection, 'tLim', input);
+        var u = inputs[matchToObject('u', inputs)].val[1];
+        var a = -9.8;
+        // v = u+at
+        var vLim = u + a*tempInput;
+        dragUpdate(1, 'vLim', vLim*scalingFactor);
+    }
 }
 

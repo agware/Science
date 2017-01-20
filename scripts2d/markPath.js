@@ -2,9 +2,8 @@
  * Created by war434 on 19/01/2017.
  */
 
-function initCurtain (r, textTypes) {
+function initCurtain (r, textTypes, curtainNum) {
 
-    const curtainNum = 10;
     const arrowOffset = 5;
     const offset = {'topY': 22, 'bottomY': 38, 'x': 15};
 
@@ -122,12 +121,20 @@ function initCurtain (r, textTypes) {
 }
 
 function updateCurtain () {
+    var numDots = d3.select('#curtainG').selectAll('circle').size();
+    if (numDots > 2) {
+        updateSpacedDots(numDots);
+    } else {
+        updateLimDots(numDots);
+    }
+}
+
+function updateSpacedDots (numDots) {
     var u = vars[matchToObject('u', vars)].val;
     var a = vars[matchToObject('a', vars)].val;
 
     var scalingFactor = d3.select('#ball').datum();
     var arrowScalingFactor = scalingFactor/4;
-    var numDots = d3.select('#curtainG').selectAll('circle').size();
     var types = d3.select('#curtainG').datum();
 
     for (var i = 0; i < numDots; i++) {
@@ -192,6 +199,49 @@ function updateCurtain () {
             d3.select('#bottomTextVertical'+ i)
                 .text(Math.round(t*100)/100 + 's');
         }
+    }
+}
+
+function updateLimDots (numDots) {
+
+    var u = vars[matchToObject('u', vars)].val;
+    var a = vars[matchToObject('a', vars)].val;
+    var xLim = vars[matchToObject('xLim', vars)].val;
+    var tLim = vars[matchToObject('tLim', vars)].val;
+    var vLim = [u[0]+a[0]*tLim[0], u[1]+a[1]*tLim[1]];
+
+    var scalingFactor = d3.select('#ball').datum();
+    var arrowScalingFactor = scalingFactor/4;
+    var types = d3.select('#curtainG').datum();
+
+    d3.select('#curtainG0').attr('transform', 'translate(' + xLim[0]*scalingFactor + ',' + (-xLim[1]*scalingFactor) + ')');
+
+    if (types.top == 'v') {
+        d3.select('#topTextHorizontal0').text(vLim[0] + 'm/s');
+        d3.select('#topTextVertical0')
+            .attr('x', vLim[1] > 3 ? 15 : 0)
+            .text(Math.round(vLim[1] * 10) / 10 + 'm/s');
+
+        d3.select('#bottomTextVertical0')
+            .attr('x', vLim[1] < -3 ? 15 : 0);
+
+        d3.select('#horizontalLineCurtain0').attr('x2', vLim[0] * arrowScalingFactor);
+        d3.select('#horizontalArrowHead0')
+            .attr('transform', 'translate(' + vLim[0] * arrowScalingFactor + ',0)')
+            .classed('hidden', -0.1 < vLim[0] && vLim[0] < 0.1);
+
+        var rotate = vLim[1] > 0 ? 0 : 180;
+        d3.select('#verticalLineCurtain0').attr('y2', -vLim[1] * arrowScalingFactor);
+
+        d3.select('#verticalArrowHead0')
+            .attr('transform', 'translate(0,' + (-vLim[1] * arrowScalingFactor) + ')rotate(' + rotate + ')')
+            .classed('hidden', -0.2 < vLim[1] && vLim[1] < 0.2);
+    }
+
+    if (types.bottom == 't') {
+        d3.select('#bottomTextHorizontal0').text(Math.round(tLim[0]*100)/100 + 's');
+        d3.select('#bottomTextVertical0')
+            .text(Math.round(tLim[0]*100)/100 + 's');
     }
 }
 

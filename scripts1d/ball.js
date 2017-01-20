@@ -65,10 +65,11 @@ function animateBall () {
             if(d3.select('#numbersRadioBand').classed('active')) {updateNumbers(); }
         }
 
-        if (loc > xLim*scalingFactor) {
+        if (loc >= xLim*scalingFactor) {
             if (!d3.select('#pause').empty()) {
                 clickPause();
             }
+            d3.select('#ball').attr('cx', xLim*scalingFactor);
 
             setTimeout(function () {
                 resetBall(animation);
