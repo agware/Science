@@ -71,7 +71,8 @@ function dragUpdate() {
     id = id.substring(0, id.length - 'DragBall'.length);
 
     var oldOffset = d3.select('#' + id + 'DraggableG').attr('transform');
-    oldOffset = parseInt(oldOffset.substring('translate('.length, oldOffset.length - ',0)'.length));
+    var endSubString = matchToString(',0', oldOffset) >= 0 ? ',0)'.length : ')'.length;
+    oldOffset = parseInt(oldOffset.substring('translate('.length, oldOffset.length - endSubString));
 
     var tempInput = Math.max(Math.min(d3.event.x + oldOffset, lim.max), lim.min);
     d3.select('#' + id + 'DragLine').attr('x2', tempInput);
