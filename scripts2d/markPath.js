@@ -236,12 +236,33 @@ function updateLimDots (numDots) {
         d3.select('#verticalArrowHead0')
             .attr('transform', 'translate(0,' + (-vLim[1] * arrowScalingFactor) + ')rotate(' + rotate + ')')
             .classed('hidden', -0.2 < vLim[1] && vLim[1] < 0.2);
+    } else if (types.top == 'x') {
+        d3.select('#topTextHorizontal0').text(Math.round(xLim[0]*10)/10 + 'm');
+        d3.select('#topTextVertical0')
+            .attr('x', xLim[1] < 0 ? 15 : 0)
+            .text(Math.round(xLim[1]*10)/10 + 'm');
+
+        d3.select('#bottomTextVertical0')
+            .attr('x', xLim[1] > 2 ? 15 : 0);
+
+        d3.select('#horizontalLineCurtain0').attr('x2', -xLim[0]*scalingFactor);
+        d3.select('#horizontalArrowHead0')
+            .attr('transform', 'translate(' + (-xLim[0]*scalingFactor) + ',0)rotate(180)');
+
+        var rotate = xLim[1] > 0 ? 180 : 0;
+        d3.select('#verticalLineCurtain0').attr('y2', xLim[1]*scalingFactor);
+        d3.select('#verticalArrowHead0')
+            .attr('transform', 'translate(0,' + (xLim[1]*scalingFactor) + ')rotate(' + rotate + ')');
+        d3.select('#verticalFixedArrowHead0').attr('transform', 'rotate(' + rotate + ')');
     }
 
     if (types.bottom == 't') {
         d3.select('#bottomTextHorizontal0').text(Math.round(tLim[0]*100)/100 + 's');
         d3.select('#bottomTextVertical0')
             .text(Math.round(tLim[0]*100)/100 + 's');
+    } else if (types.bottom == 'x') {
+        d3.select('#bottomTextHorizontal0').text(Math.round(xLim[0]*10)/10 + 'm');
+        d3.select('#bottomTextVertical0').text(Math.round(xLim[0]*10)/10 + 'm');
     }
 }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fourth Formula</title>
+    <title>Third Formula</title>
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../scriptsShared/styles.css">
@@ -29,17 +29,17 @@
 
 <script>
 
-    var inputs = [{'id': 'u', 'name': 'u', 'val': [7, 12], 'measure': 'm/s', 'numDraggable': 2},
-                  {'id': 'vLim', 'name': 'v', 'val': [7, 2.2], 'measure': 'm/s', 'numDraggable': 1},
-                  {'id': 'tLim', 'name': 't', 'val': [1, 1], 'measure': 's', 'numDraggable': 2}];
+    var inputs = [{'id': 'xLim', 'name': 'x', 'val': [14.4, 4], 'measure': 'm', 'numDraggable': 2},
+                  {'id': 'u', 'name': 'u', 'val': [7, 12], 'measure': 'm/s', 'numDraggable': 2},
+                  {'id': 'a', 'name': 'a', 'val': [0, -9.8], 'measure': 'm/s²', 'numDraggable': 0}];
     var heightInput = {'id': 'x0', 'val': [0,2]};
     var vars = [{'id': 'u', 'val': [0,0]},
-                {'id': 'a', 'val': [0, -9.8]},
+                {'id': 'a', 'val': [0,0]},
                 {'id': 't', 'val': [0,0]},
-                {'id': 'v', 'val': [0,0]},
+                {'id': 'tLim', 'val': [0,0]},
+                {'id': 'x', 'val': [0,0]},
                 {'id': 'x0', 'val': [0,0]},
-                {'id': 'xLim', 'val': [0,0]},
-                {'id': 'tLim', 'val': [0,0]}];
+                {'id': 'xLim', 'val': [0,0]}];
     var animation = {'start': Date.now(), 'mem': 0, 'state': false};
 
     initSvg();
@@ -101,7 +101,7 @@
         d3.select('#frameG').append('g')
             .attr('id', 'ballG');
 
-        const textTypes = {'top': 'x', 'bottom': 't'};
+        const textTypes = {'top': 'v', 'bottom': 'x'};
         const num = 1;
         initCurtain(ballRadius, textTypes, num);
 
@@ -121,9 +121,9 @@
         initBall(ballRadius);
         initHeightDrag();
 
-        const formula = ['x', '=', '½', '(', 'u', '+', 'v', ')', 't'];
-        const textGap = [0, 30, 30, 45, 15, 35, 33, 27, 20];
-        const formulaOffset = {'x': 240, 'y': 70};
+        const formula = ['v', '²', '=', 'u', '²', '+', '2', '•', 'a', '•', 'x'];
+        const textGap = [0, 30, 25, 35, 35, 25, 30, 30, 20, 30, 20];
+        const formulaOffset = {'x': 200, 'y': 70};
         d3.select('#animationSvg').append('g')
             .attr('transform', 'translate(' + formulaOffset.x + ',' + formulaOffset.y + ')')
             .attr('id', 'formulaG');
@@ -132,32 +132,35 @@
         initVelocityArrows();
         clickHorizontal();
     }
+    
+    function updateVars() {
 
-    function updateVars () {
+        for (var i = 0; i < inputs.length; i++) {
+            var index = matchToObject(inputs[i].id, vars);
+            vars[index].val = [inputs[i].val[0], inputs[i].val[1]];
+        }
+
+        var xLim = vars[matchToObject('xLim', vars)].val;
+        var u = vars[matchToObject('u', vars)].val;
+        var a = vars[matchToObject('a', vars)].val;
+        var tLimIndex = matchToObject('tLim', vars);
+        var tLim = [0,0];
+
+        //  x = (1/2)(v+u)t
+        tLim[0] = u[0] ? xLim[0]/u[0] : 0;
+
+        // x = ut + (1/2)at^2   +   quadratic equation
+        tLim[1] = (-u[1] - Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*xLim[1]))/a[1];
+        vars[tLimIndex].val = [tLim[0], tLim[1]];
 
         var hIndex = matchToObject(heightInput.id, vars);
-        vars[hIndex].val = heightInput.val;
-
-        var u = inputs[matchToObject('u', inputs)].val;
-        var vLim = inputs[matchToObject('vLim', inputs)].val;
-        var tLim = inputs[matchToObject('tLim', inputs)].val;
-
-        var uIndex = matchToObject('u', vars);
-        vars[uIndex].val = [u[0], u[1]];
-        var vIndex = matchToObject('v', vars);
-        vars[vIndex].val = [u[0], u[1]];
-        var tLimIndex = matchToObject('tLim', vars);
-        vars[tLimIndex].val = tLim;
-
-        // x = (1/2)*(v+u)*t
-        var xLim = [(1/2)*(vLim[0]+u[0])*tLim[0], (1/2)*(vLim[1]+u[1])*tLim[1]];
-        var xLimIndex = matchToObject('xLim', vars);
-        vars[xLimIndex].val = xLim;
+        vars[hIndex].val = [heightInput.val[0], heightInput.val[1]];
 
         updateBall();
         updateCurtain();
         updateVelocityArrows();
         if(d3.select('#numbersRadioBand').classed('active')) {updateNumbers(); }
+        
     }
 
 </script>

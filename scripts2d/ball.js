@@ -81,14 +81,13 @@ function animateBall () {
 
             // x = ut + (1/2)at^2
             x[i] = (u[i] * t[i] + (1 / 2) * a[i] * Math.pow(t[i], 2));
-            if (xIndex >= 0) {vars[xIndex].val[i] = Math.round(x[i] * 10)/ 10; }
+            if (xIndex >= 0) {vars[xIndex].val[i] = Math.floor(x[i] * 10)/ 10; }
 
             // v = u + at
             v[i] = u[i] + a[i] * t[i];
             if (vIndex >= 0) {vars[vIndex].val[i] = Math.round(v[i]); }
 
             loc[i] = x[i] * scalingFactor;
-
         }
 
         d3.select('#ball')
@@ -99,7 +98,11 @@ function animateBall () {
 
         var limHit = false;
         if (tLimIndex >= 0) {
-            limHit = tempT >= vars[tLimIndex].val[0];
+            if (vars[tLimIndex].val[0] > 0) {
+                limHit = tempT >= vars[tLimIndex].val[0];
+            } else {
+                limHit = tempT >= vars[tLimIndex].val[1];
+            }
         } else {
             limHit = loc[0] > xLim[0]*scalingFactor || loc[1] < xLim[1]*scalingFactor;
         }

@@ -84,14 +84,14 @@ function initInputsDrag () {
             var negArrow = lineLen > 0 ? 1 : 0;
             var arrowShift = 0;
             arrowShift -= inputs[i].id == 'a' ? 45 : 0;
-            arrowShift -= inputs[i].id == 'vLim' ? 30 : 0;
+            arrowShift -= (inputs[i].id == 'vLim' || inputs[i].id == 'xLim') ? 30 : 0;
 
             d3.select('#' + inputs[i].id + 'G').append('g')
                 .attr('transform', 'translate(' + verticalOffset.x + ',' + (verticalOffset.y + arrowShift) + ')')
                 .attr('id', inputs[i].id + 'VerticalG');
 
             d3.select('#' + inputs[i].id + 'VerticalG').append('text')
-                .attr('x', -verticalOffset.text + (inputs[i].id == 'vLim' ? 23 : 0))
+                .attr('x', -verticalOffset.text + (inputs[i].id == 'vLim' || inputs[i].id == 'xLim' ? 23 : 0))
                 .attr('y', verticalOffset.text*(negArrow ? -0.2 : 1))
                 .attr('id', inputs[i].id + 'VerticalText')
                 .text(inputs[i].val[1] + inputs[i].measure);
@@ -183,10 +183,13 @@ function dragHorizontalUpdate () {
         var u = inputs[matchToObject('u', inputs)].val[1];
         lim.min = Math.max(((10 - u)/(-9.8))*scalingFactor, 0);
         lim.max = ((-10 - u)/(-9.8))*scalingFactor;
+    } else if (id == 'xLim') {
+        lim.max = 68;
     }
 
     var oldOffset = d3.select('#' + id + 'HorizontalDraggableG').attr('transform');
-    oldOffset = parseInt(oldOffset.substring('translate('.length, oldOffset.length - ',0)'.length));
+    var endSubString = matchToString(',0', oldOffset) >= 0 ? ',0)'.length : ')'.length;
+    oldOffset = parseInt(oldOffset.substring('translate('.length, oldOffset.length - endSubString));
 
     var tempInput = Math.max(Math.min(d3.event.x + oldOffset, lim.max), lim.min);
 
@@ -204,7 +207,7 @@ function dragVerticalUpdate () {
     id = id.substring(0, id.length - 'VerticalDragBall'.length);
 
     var lim = {'min': 0, 'max': 80};
-    if (id == 'vLim') {
+    if (id == 'vLim' || id == 'xLim') {
         lim.min = -40;
         lim.max = 40;
     } else if (id == 'tLim') {
@@ -215,7 +218,7 @@ function dragVerticalUpdate () {
     }
 
     var oldOffset = d3.select('#' + id + 'VerticalDraggableG').attr('transform');
-    oldOffset = parseInt(oldOffset.substring('translate(0,'.length, oldOffset.length - ')'.length));
+    oldOffset = (oldOffset.length == 'translate(0)'.length) ? 0 : parseInt(oldOffset.substring('translate(0,'.length, oldOffset.length - ')'.length));
 
     var tempInput = Math.max(Math.min(-(d3.event.y + oldOffset), lim.max), lim.min);
 
@@ -239,7 +242,7 @@ function dragUpdate(direction, id, input) {
     if (id == 'tLim') {
         scalingFactor = 5*scalingFactor;
         input = Math.round(input*100/scalingFactor)/100;
-    } else if (id == 'vLim' && direction) {
+    } else if (id == 'vLim' && direction || id == 'xLim') {
         input = Math.round(input*10/scalingFactor)/10;
     } else {
         input = Math.round(input/scalingFactor);
@@ -247,7 +250,6 @@ function dragUpdate(direction, id, input) {
     var index = matchToObject(id, inputs);
     inputs[index].val[direction] = input;
     d3.select('#' + id + directionName + 'Text').text(input + inputs[index].measure);
-    console.log(d3.select('#' + id + directionName + 'ArrowHead').attr('id'));
     d3.select('#' + id + directionName + 'ArrowHead').attr('transform', 'rotate(' + (input < 0 ? 180 : 0) + ')');
 }
 
@@ -256,7 +258,9 @@ function dragHeightUpdate () {
     var lim = {'min': r, 'max': d3.select('#animationSvg').attr('height') - r};
 
     var oldOffset = d3.select('#ballG').attr('transform');
-    oldOffset = parseInt(oldOffset.substring(matchToString(',', oldOffset) + 1, oldOffset.length - ')'.length));
+    var startSubString = matchToString(',', oldOffset) + 1;
+    startSubString = startSubString > 0 ? startSubString : matchToString(' ', oldOffset) + 1;
+    oldOffset = parseInt(oldOffset.substring(startSubString, oldOffset.length - ')'.length));
 
     var input = Math.max(Math.min(-(d3.event.y+oldOffset), lim.max), lim.min) - r;
     var scalingFactor = d3.select('#ball').datum();
@@ -276,11 +280,13 @@ function checkIfTied (id) {
     var ret = false;
 
     if (id == 'u') {
-        ret = matchToObject('vLim', inputs) >= 0;
+        ret = matchToObject('vLim', inputs) >= 0 || matchToObject('xLim', inputs) >= 0;
     } else if (id == 'vLim') {
         ret = matchToObject('tLim', inputs) >= 0;
     } else if (id == 'tLim') {
         ret = matchToObject('vLim', inputs) >= 0;
+    } else if (id == 'xLim') {
+        ret = true;
     }
 
     return ret;
@@ -291,20 +297,43 @@ function updateTiedInputs (direction, id, input) {
     var opDirection = direction ? 0 : 1;
 
     if (id == 'u') {
-        var tempInput = Math.round(input/scalingFactor);
-        if (!direction) {
-            dragUpdate(direction, 'vLim', input);
-        } else {
-            var vLim = inputs[matchToObject('vLim', inputs)].val[direction];
-            if (vLim > tempInput) {
-                dragUpdate(direction, 'vLim', tempInput*scalingFactor);
-                vLim = tempInput;
+        var vLimIndex = matchToObject('vLim', inputs);
+        if (vLimIndex >= 0) {
+            var tempInput = Math.round(input/scalingFactor);
+            if (!direction) {
+                dragUpdate(direction, 'vLim', input);
+            } else {
+                var vLim = inputs[vLimIndex].val[direction];
+                if (vLim > tempInput) {
+                    dragUpdate(direction, 'vLim', tempInput*scalingFactor);
+                    vLim = tempInput;
+                }
+                // v=u+at
+                var a = -9.8;
+                var tLim = (vLim - tempInput)/a;
+                dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
+                dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
             }
-            // v=u+at
-            var a = -9.8;
-            var tLim = (vLim - tempInput)/a;
-            dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
-            dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
+        } else {
+            var tempInput = Math.round(input/scalingFactor);
+            var xLim = inputs[matchToObject('xLim', inputs)].val;
+            var u = inputs[matchToObject('u', inputs)].val;
+            var a = [0,-9.8];
+            var tLim;
+            var output;
+            if (direction) {
+                tLim = u[0] ? xLim[0]/u[0] : 0;
+                output = tempInput*tLim + (1/2)*a[1]*Math.pow(tLim, 2);
+            } else {
+                var tTop = -u[1]/a[1];
+                if (tTop*tempInput > xLim[0]) {
+                    tLim = (-u[1] + Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*xLim[1]))/a[1];
+                } else {
+                    tLim = (-u[1] - Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*xLim[1]))/a[1];
+                }
+                output = tempInput*tLim;
+            }
+            dragUpdate(direction, 'xLim', output*scalingFactor);
         }
     } else if (id == 'vLim') {
         var tempInput = Math.round(input*10/scalingFactor)/10;
@@ -318,7 +347,6 @@ function updateTiedInputs (direction, id, input) {
         var tLim = (tempInput - u)/a;
         dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
         dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
-
     } else if (id == 'tLim') {
         var tempInput = Math.round(input*100/(5*scalingFactor))/100;
         dragUpdate(opDirection, 'tLim', input);
@@ -327,6 +355,46 @@ function updateTiedInputs (direction, id, input) {
         // v = u+at
         var vLim = u + a*tempInput;
         dragUpdate(1, 'vLim', vLim*scalingFactor);
+    } else if (id == 'xLim') {
+        var tempInput = Math.round(input*10/scalingFactor)/10;
+        var u = inputs[matchToObject('u', inputs)].val;
+        var a = [0,-9.8];
+        if (!direction) {
+            var tLim = u[direction] ? tempInput/u[direction] : 0;
+            var output = u[opDirection]*tLim + (1/2)*a[opDirection]*Math.pow(tLim, 2);
+            dragUpdate(opDirection, 'xLim', output*scalingFactor);
+        } else {
+            // v^2 = u^2 + 2ax
+            var xMax = Math.pow(u[1], 2)/(-2*a[1]);
+            if (tempInput > xMax) {
+                tempInput = xMax;
+                dragUpdate(direction, 'xLim', tempInput*scalingFactor);
+            }
+            var tTop = -u[1]/a[1];
+            var xLim = inputs[matchToObject('xLim', inputs)].val;
+            var tLim;
+            var output;
+            if (tTop*u[0] > xLim[0]) {
+                if (tempInput < 0) {
+                    tempInput = 0;
+                    dragUpdate(direction, 'xLim', tempInput*scalingFactor);
+                }
+                tLim = (-u[1] + Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*tempInput))/a[1];
+                output = tLim*u[0];
+            } else {
+                tLim = (-u[1] - Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*tempInput))/a[1];
+                output = tLim*u[0];
+                if (output > 17) {
+                    output = 17;
+                    tLim = u[0] ? output/u[0] : 0;
+                    tempInput = u[1]*tLim + (1/2)*a[1]*Math.pow(tLim, 2);
+                    dragUpdate(direction, 'xLim', tempInput*scalingFactor);
+                }
+            }
+            dragUpdate(opDirection, 'xLim', output*scalingFactor);
+        }
+
+
     }
 }
 
