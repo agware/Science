@@ -7,6 +7,8 @@ function initCurtain (r, textTypes, curtainNum) {
     const arrowOffset = 5;
     const offset = {'topY': 22, 'bottomY': 38, 'x': 15};
 
+    if (curtainNum < 2) {initCurtainPath(); }
+
     d3.select('#ballG').append('g')
         .attr('id', 'curtainG')
         .datum(textTypes)
@@ -15,15 +17,10 @@ function initCurtain (r, textTypes, curtainNum) {
         .append('g')
         .attr('id', function (d) {return 'curtainG' + d; });
 
-
     for (var i = 0; i < curtainNum; i++) {
         d3.select('#curtainG' + i).append('circle')
             .attr('r', r)
-            .attr('id', 'dotG' + i)
-            .classed('shadow2', true)
-            .classed('clickable', true)
-            .on('mouseover', displayText)
-            .on('mouseout', exitHover);
+            .attr('id', 'dotG' + i);
 
         // Horizontal Stuff
         d3.select('#curtainG' + i).append('g')
@@ -114,15 +111,43 @@ function initCurtain (r, textTypes, curtainNum) {
             .attr('id', 'bottomTextVertical' + i);
     }
 
-    d3.select('#curtainG').selectAll('text').classed('hidden', true);
-    if (textTypes.top == 'x') {
-        d3.select('#curtainG').selectAll('line').classed('hidden', true);
+    if (curtainNum > 1) {
+        d3.select('#curtainG').selectAll('circle')
+            .classed('shadow2', true)
+            .on('mouseover', displayText)
+            .on('mouseout', exitHover);
+        d3.select('#curtainG').selectAll('text').classed('hidden', true);
+        if (textTypes.top == 'x') {
+            d3.select('#curtainG').selectAll('line').classed('hidden', true);
+        }
+    } else {
+        d3.select('#curtainG').selectAll('circle').classed('shadow', true);
+        d3.select('#topTextHorizontal0').classed('horizontal', true);
+        d3.select('#bottomTextHorizontal0').classed('horizontal', true);
+        d3.select('#topTextVertical0').classed('vertical', true);
+        d3.select('#bottomTextVertical0').classed('vertical', true);
+        if (textTypes.top == 'x') {
+            d3.select('#arrowGHorizontal0').selectAll('line').classed('horizontal', true);
+            d3.select('#arrowGVertical0').selectAll('line').classed('vertical', true);
+        }
+    }
+}
+
+function initCurtainPath () {
+    const dotNum = 60;
+    const r = 4;
+
+    for (var i = 0; i < dotNum; i++) {
+        d3.select('#ballG').append('circle')
+            .attr('r', r)
+            .attr('id', 'dotPath' + i)
+            .classed('shadow', true);
     }
 }
 
 function updateCurtain () {
     var numDots = d3.select('#curtainG').selectAll('circle').size();
-    if (numDots > 2) {
+    if (numDots > 1) {
         updateSpacedDots(numDots);
     } else {
         updateLimDots(numDots);
@@ -202,15 +227,26 @@ function updateSpacedDots (numDots) {
     }
 }
 
-function updateLimDots (numDots) {
+function updateLimDots () {
 
     var u = vars[matchToObject('u', vars)].val;
     var a = vars[matchToObject('a', vars)].val;
+    var scalingFactor = d3.select('#ball').datum();
+
+    const numDots = 60;
+    for (var i = 0; i < numDots; i++) {
+        var t = (i+1)/10;
+        var x = [u[0]*t + (1/2)*a[0]*Math.pow(t, 2), u[1]*t + (1/2)*a[1]*Math.pow(t, 2)];
+        d3.select('#dotPath' + i)
+            .attr('cx', x[0]*scalingFactor)
+            .attr('cy', -x[1]*scalingFactor);
+    }
+
     var xLim = vars[matchToObject('xLim', vars)].val;
     var tLim = vars[matchToObject('tLim', vars)].val;
-    var vLim = [u[0]+a[0]*tLim[0], u[1]+a[1]*tLim[1]];
+    var xTop = [-u[1]/a[1]]*u[0];
+    var vLim = [u[0]+a[0]*tLim[0], (u[1]+a[1]*tLim[1])*(xLim[0] > xTop ? 1 : -1)];
 
-    var scalingFactor = d3.select('#ball').datum();
     var arrowScalingFactor = scalingFactor/4;
     var types = d3.select('#curtainG').datum();
 

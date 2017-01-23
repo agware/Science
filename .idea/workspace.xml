@@ -3,20 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="44460a93-bb1c-49e1-95ac-89377c7babf2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/acceleration.html" afterPath="$PROJECT_DIR$/animations/acceleration.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/d2-first-formula.html" afterPath="$PROJECT_DIR$/animations/d2-first-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/d2-fourth-formula.html" afterPath="$PROJECT_DIR$/animations/d2-fourth-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/d2-second-formula.html" afterPath="$PROJECT_DIR$/animations/d2-second-formula.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/d2-third-formula.html" afterPath="$PROJECT_DIR$/animations/d2-third-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/first-formula.html" afterPath="$PROJECT_DIR$/animations/first-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/fourth-formula.html" afterPath="$PROJECT_DIR$/animations/fourth-formula.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/index.html" afterPath="$PROJECT_DIR$/animations/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/pythagoras.html" afterPath="$PROJECT_DIR$/animations/pythagoras.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/second-formula.html" afterPath="$PROJECT_DIR$/animations/second-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/sohcahtoa-second.html" afterPath="$PROJECT_DIR$/animations/sohcahtoa-second.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/sohcahtoa.html" afterPath="$PROJECT_DIR$/animations/sohcahtoa.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/third-formula.html" afterPath="$PROJECT_DIR$/animations/third-formula.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/animations/velocity.html" afterPath="$PROJECT_DIR$/animations/velocity.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts2d/drag.js" afterPath="$PROJECT_DIR$/scripts2d/drag.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts2d/markPath.js" afterPath="$PROJECT_DIR$/scripts2d/markPath.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scriptsShared/styles.css" afterPath="$PROJECT_DIR$/scriptsShared/styles.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scriptsShared/utils.js" afterPath="$PROJECT_DIR$/scriptsShared/utils.js" />
     </list>
@@ -36,113 +27,89 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="first-formula.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/first-formula.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="42" column="51" lean-forward="false" selection-start-line="42" selection-start-column="51" selection-end-line="42" selection-end-column="51" />
-              <folding>
-                <element signature="e#1688#2254#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fourth-formula.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/fourth-formula.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
-              <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/animations/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="31" column="51" lean-forward="false" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+            <state relative-caret-position="340">
+              <caret line="87" column="14" lean-forward="false" selection-start-line="87" selection-start-column="14" selection-end-line="87" selection-end-column="14" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pythagoras.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/pythagoras.html">
+      <file leaf-file-name="markPath.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts2d/markPath.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="8" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+            <state relative-caret-position="187">
+              <caret line="235" column="21" lean-forward="false" selection-start-line="235" selection-start-column="21" selection-end-line="235" selection-end-column="21" />
               <folding>
-                <element signature="e#1176#1456#0" expanded="false" />
+                <element signature="n#!!doc;n#initCurtain#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="second-formula.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/second-formula.html">
+      <file leaf-file-name="drag.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scripts2d/drag.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+            <state relative-caret-position="1208">
+              <caret line="312" column="35" lean-forward="false" selection-start-line="312" selection-start-column="35" selection-end-line="312" selection-end-column="35" />
               <folding>
-                <element signature="e#1643#2209#0" expanded="false" />
-                <element signature="e#2240#2745#0" expanded="false" />
+                <element signature="n#!!doc;n#initInputsDrag#0" expanded="false" />
+                <element signature="n#!!block;n#dragEnd#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sohcahtoa.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/sohcahtoa.html">
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/scriptsShared/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
-              <folding>
-                <element signature="e#1215#1495#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="acceleration.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/animations/acceleration.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="e#1307#1587#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sohcahtoa-second.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/sohcahtoa-second.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="169">
+              <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="third-formula.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/third-formula.html">
+      <file leaf-file-name="d2-second-formula.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/animations/d2-second-formula.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+            <state relative-caret-position="663">
+              <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="velocity.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/animations/velocity.html">
+      <file leaf-file-name="d2-third-formula.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/animations/d2-third-formula.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+            <state relative-caret-position="2263">
+              <caret line="145" column="27" lean-forward="true" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="d2-fourth-formula.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/animations/d2-fourth-formula.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="663">
+              <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="utils.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/scriptsShared/utils.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+              <folding>
+                <element signature="n#!!doc;n#matchToObject#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -160,9 +127,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sca</find>
-      <find>xlim</find>
-      <find>inputs.</find>
       <find>text(inputs</find>
       <find>xLim</find>
       <find>inputs(</find>
@@ -188,8 +152,11 @@
       <find>'v', vars</find>
       <find>shift</find>
       <find>conso</find>
-      <find>console</find>
       <find>/u</find>
+      <find>link</find>
+      <find>lastLink</find>
+      <find>u[0] ? xLim[0]/u[0] : 0</find>
+      <find>console</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\WAR434\WebstormProjects\Motion</dir>
@@ -225,25 +192,25 @@
         <option value="$PROJECT_DIR$/scripts2d/velocityArrows.js" />
         <option value="$PROJECT_DIR$/scripts1d/drag.js" />
         <option value="$PROJECT_DIR$/scripts1d/ball.js" />
-        <option value="$PROJECT_DIR$/scripts2d/drag.js" />
-        <option value="$PROJECT_DIR$/scripts2d/markPath.js" />
         <option value="$PROJECT_DIR$/scripts2d/ball.js" />
-        <option value="$PROJECT_DIR$/scriptsShared/styles.css" />
-        <option value="$PROJECT_DIR$/scriptsShared/utils.js" />
         <option value="$PROJECT_DIR$/animations/pythagoras.html" />
         <option value="$PROJECT_DIR$/animations/acceleration.html" />
         <option value="$PROJECT_DIR$/animations/d2-first-formula.html" />
         <option value="$PROJECT_DIR$/animations/d2-fourth-formula.html" />
         <option value="$PROJECT_DIR$/animations/d2-second-formula.html" />
-        <option value="$PROJECT_DIR$/animations/d2-third-formula.html" />
         <option value="$PROJECT_DIR$/animations/first-formula.html" />
         <option value="$PROJECT_DIR$/animations/fourth-formula.html" />
-        <option value="$PROJECT_DIR$/animations/index.html" />
         <option value="$PROJECT_DIR$/animations/second-formula.html" />
         <option value="$PROJECT_DIR$/animations/sohcahtoa.html" />
-        <option value="$PROJECT_DIR$/animations/sohcahtoa-second.html" />
-        <option value="$PROJECT_DIR$/animations/third-formula.html" />
         <option value="$PROJECT_DIR$/animations/velocity.html" />
+        <option value="$PROJECT_DIR$/animations/third-formula.html" />
+        <option value="$PROJECT_DIR$/animations/sohcahtoa-second.html" />
+        <option value="$PROJECT_DIR$/animations/index.html" />
+        <option value="$PROJECT_DIR$/scriptsShared/styles.css" />
+        <option value="$PROJECT_DIR$/animations/d2-third-formula.html" />
+        <option value="$PROJECT_DIR$/scripts2d/drag.js" />
+        <option value="$PROJECT_DIR$/scripts2d/markPath.js" />
+        <option value="$PROJECT_DIR$/scriptsShared/utils.js" />
       </list>
     </option>
   </component>
@@ -260,8 +227,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1039" />
-    <option name="width" value="888" />
+    <option name="x" value="953" />
+    <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
@@ -279,6 +246,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -340,7 +308,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -439,7 +406,8 @@
       <workItem from="1484691556689" duration="20556000" />
       <workItem from="1484779088647" duration="20874000" />
       <workItem from="1484865040309" duration="19533000" />
-      <workItem from="1485123997442" duration="19737000" />
+      <workItem from="1485123997442" duration="21329000" />
+      <workItem from="1485210172593" duration="5588000" />
     </task>
     <task id="LOCAL-00001" summary="Save changes">
       <created>1485129419875</created>
@@ -455,21 +423,26 @@
       <option name="project" value="LOCAL" />
       <updated>1485146557933</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Headers and footers added">
+      <created>1485149321845</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1485149321845</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="118275000" />
+    <option name="totallyTimeSpent" value="125455000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1039" y="0" width="888" height="1047" extended-state="0" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26720184" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25156575" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -477,10 +450,12 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -512,7 +487,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Save changes" />
     <MESSAGE value="Third formula in two dimensions animated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Third formula in two dimensions animated" />
+    <MESSAGE value="Headers and footers added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Headers and footers added" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -791,33 +767,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scripts2d/markPath.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="593">
-          <caret line="262" column="33" lean-forward="false" selection-start-line="262" selection-start-column="33" selection-end-line="262" selection-end-column="33" />
-          <folding>
-            <element signature="n#!!doc;n#initCurtain#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/scripts2d/formula.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="65" column="36" lean-forward="false" selection-start-line="65" selection-start-column="36" selection-end-line="65" selection-end-column="36" />
           <folding>
             <element signature="n#!!doc;n#initFormula#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scripts2d/drag.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="339" column="12" lean-forward="false" selection-start-line="339" selection-start-column="12" selection-end-line="339" selection-end-column="12" />
-          <folding>
-            <element signature="n#!!doc;n#initInputsDrag#0" expanded="false" />
-            <element signature="n#!!block;n#dragEnd#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -832,49 +787,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/scriptsShared/styles.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
-          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/scriptsShared/utils.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="28" column="64" lean-forward="false" selection-start-line="28" selection-start-column="64" selection-end-line="28" selection-end-column="64" />
-          <folding>
-            <element signature="n#!!doc;n#matchToObject#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/animations/d2-first-formula.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/animations/d2-fourth-formula.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/animations/d2-second-formula.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/animations/d2-third-formula.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="663">
           <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
@@ -900,10 +813,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/animations/index.html">
+    <entry file="file://$PROJECT_DIR$/animations/velocity.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="31" column="51" lean-forward="false" selection-start-line="31" selection-start-column="51" selection-end-line="31" selection-end-column="51" />
+        <state relative-caret-position="578">
+          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animations/sohcahtoa.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+          <folding>
+            <element signature="e#1215#1495#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animations/acceleration.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <element signature="e#1307#1587#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animations/sohcahtoa-second.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -931,44 +872,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/animations/third-formula.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="51" lean-forward="false" selection-start-line="38" selection-start-column="51" selection-end-line="38" selection-end-column="51" />
+        <state relative-caret-position="578">
+          <caret line="34" column="0" lean-forward="false" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="72" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/animations/velocity.html">
+    <entry file="file://$PROJECT_DIR$/animations/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+        <state relative-caret-position="340">
+          <caret line="87" column="14" lean-forward="false" selection-start-line="87" selection-start-column="14" selection-end-line="87" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/animations/sohcahtoa.html">
+    <entry file="file://$PROJECT_DIR$/scriptsShared/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="51" lean-forward="false" selection-start-line="34" selection-start-column="51" selection-end-line="34" selection-end-column="51" />
+        <state relative-caret-position="169">
+          <caret line="55" column="20" lean-forward="true" selection-start-line="55" selection-start-column="20" selection-end-line="55" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animations/d2-second-formula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scripts2d/drag.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1208">
+          <caret line="312" column="35" lean-forward="false" selection-start-line="312" selection-start-column="35" selection-end-line="312" selection-end-column="35" />
           <folding>
-            <element signature="e#1215#1495#0" expanded="false" />
+            <element signature="n#!!doc;n#initInputsDrag#0" expanded="false" />
+            <element signature="n#!!block;n#dragEnd#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/animations/sohcahtoa-second.html">
+    <entry file="file://$PROJECT_DIR$/scripts2d/markPath.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="235" column="21" lean-forward="false" selection-start-line="235" selection-start-column="21" selection-end-line="235" selection-end-column="21" />
+          <folding>
+            <element signature="n#!!doc;n#initCurtain#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/animations/d2-third-formula.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2263">
+          <caret line="145" column="27" lean-forward="true" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/animations/acceleration.html">
+    <entry file="file://$PROJECT_DIR$/animations/d2-fourth-formula.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="663">
+          <caret line="39" column="51" lean-forward="false" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scriptsShared/utils.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="29" column="1" lean-forward="true" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
           <folding>
-            <element signature="e#1307#1587#0" expanded="false" />
+            <element signature="n#!!doc;n#matchToObject#0" expanded="false" />
           </folding>
         </state>
       </provider>

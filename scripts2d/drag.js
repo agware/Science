@@ -310,9 +310,9 @@ function updateTiedInputs (direction, id, input) {
                 }
                 // v=u+at
                 var a = -9.8;
-                var tLim = (vLim - tempInput)/a;
-                dragUpdate(direction, 'tLim', tLim*scalingFactor*5);
-                dragUpdate(opDirection, 'tLim', tLim*scalingFactor*5);
+                var tLim = inputs[matchToObject('tLim', inputs)].val[0];
+                var vLim = tempInput + a*tLim;
+                dragUpdate(direction, 'vLim', vLim*scalingFactor);
             }
         } else {
             var tempInput = Math.round(input/scalingFactor);
@@ -331,7 +331,7 @@ function updateTiedInputs (direction, id, input) {
                 } else {
                     tLim = (-u[1] - Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*xLim[1]))/a[1];
                 }
-                output = tempInput*tLim;
+                output = tempInput*Math.abs(tLim);
             }
             dragUpdate(direction, 'xLim', output*scalingFactor);
         }
@@ -362,6 +362,12 @@ function updateTiedInputs (direction, id, input) {
         if (!direction) {
             var tLim = u[direction] ? tempInput/u[direction] : 0;
             var output = u[opDirection]*tLim + (1/2)*a[opDirection]*Math.pow(tLim, 2);
+            if (output < -10) {
+                output = -10;
+                tLim = (-u[1] - Math.sqrt(Math.pow(u[1], 2) + 2*a[1]*output))/a[1];
+                tempInput = tLim*u[0];
+                dragUpdate(direction, 'xLim', tempInput*scalingFactor);
+            }
             dragUpdate(opDirection, 'xLim', output*scalingFactor);
         } else {
             // v^2 = u^2 + 2ax

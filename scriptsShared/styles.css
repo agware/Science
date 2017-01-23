@@ -15,26 +15,27 @@ text {
     fill: #000;
 }
 
-h1 {
-    font-size: 50px;
-}
-
-p {
-    font-size: 10px;
-}
-
 #header, #footer {
-    padding: 1em;
     background-color: #DCDCDC;
     font-family: 'Open Sans', sans-serif;
-    clear: left;
     text-align: center;
     font-weight: bold;
     fill: #000;
+    float:left;
+    padding: 5px 0;
+    min-width: 100%;
 }
 
 #header {
     cursor: pointer;
+}
+
+#header h1 {
+    font-size: 45px;
+}
+
+#footer p {
+    font-size: 10px;
 }
 
 #wrapper {

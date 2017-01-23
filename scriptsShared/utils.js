@@ -26,5 +26,5 @@ function matchToString(id, string) {
 }
 
 function navigateHome() {
-    window.location = 'https://agware.github.io/display/index/';
+    //window.location = 'https://agware.github.io/display/index/';
 }
