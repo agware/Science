@@ -24,3 +24,7 @@ function matchToString(id, string) {
     }
     return index;
 }
+
+function navigateHome() {
+    window.location = 'https://agware.github.io/display/index/';
+}

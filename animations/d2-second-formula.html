@@ -10,11 +10,19 @@
 </head>
 <body>
 
+<div id="header">
+    <h1>Motion</h1>
+</div>
+
 <div id="wrapper">
     <div id="container">
         <div id="animation"></div>
         <div id="control"></div>
     </div>
+</div>
+
+<div id="footer">
+    <p>Owned by CSIRO.... etc.</p>
 </div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
@@ -28,6 +36,8 @@
 <script src="../scriptsShared/utils.js" type="text/javascript"></script>
 
 <script>
+
+    d3.select('#header').on('click', navigateHome);
 
     var inputs = [{'id': 'u', 'name': 'u', 'val': [7, 12], 'measure': 'm/s', 'numDraggable': 2},
                   {'id': 'a', 'name': 'a', 'val': [0, -9.8], 'measure': 'm/s²', 'numDraggable': 0}];

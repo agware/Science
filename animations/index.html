@@ -10,12 +10,26 @@
 </head>
 <body>
 
+<div id="header">
+    <h1>Motion</h1>
+</div>
+
+<div id="header">
+    <h1>Motion</h1>
+</div>
+
 <div id="wrapper">
     <div id="container"></div>
 </div>
 
+<div id="footer">
+    <p>Owned by CSIRO.... etc.</p>
+</div>
+
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
+
+    d3.select('#header').on('click', navigateHome);
 
     const dim = {headingWidth: 700, headingHeight: 60, linkWidth: 200, linkHeight: 100};
 
@@ -35,6 +49,7 @@
         {id: 'formulas2D', group: 'heading', text:'Motion formulas in 2-dimensions'},
         {id: 'd2Formula1', group: 'link', text: 'First formula', link: 'https://agware.github.io/display/d2-first-formula/'},
         {id: 'd2Formula2', group: 'link', text: 'Second formula', link: 'https://agware.github.io/display/d2-second-formula/'},
+        {id: 'd2Formula3', group: 'link', text: 'Third formula', link: 'https://agware.github.io/display/d2-third-formula/'},
         {id: 'd2Formula4', group: 'lastLink', text: 'Fourth formula', link: 'https://agware.github.io/display/d2-fourth-formula/'}
     ];
 
@@ -59,7 +74,7 @@
             d3.select('#' + categories[i].id + 'svg').append('text')
                 .attr('y', textOffset)
                 .text(categories[i].text)
-                .style('font-size', '40px')
+                .style('font-size', '30px')
                 .style('font-weight', 'bold')
                 .style('text-decoration', 'underline');
 

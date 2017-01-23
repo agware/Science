@@ -15,6 +15,28 @@ text {
     fill: #000;
 }
 
+h1 {
+    font-size: 50px;
+}
+
+p {
+    font-size: 10px;
+}
+
+#header, #footer {
+    padding: 1em;
+    background-color: #DCDCDC;
+    font-family: 'Open Sans', sans-serif;
+    clear: left;
+    text-align: center;
+    font-weight: bold;
+    fill: #000;
+}
+
+#header {
+    cursor: pointer;
+}
+
 #wrapper {
     text-align: center;
 }
@@ -25,7 +47,7 @@ text {
 
 #animation, #control {
     float: left;
-    margin-right: 2px;
+    padding: 12px 2px 5px;
 }
 
 .clickable {
