@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice Problem</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../scriptsShared/styles.css">
+
+</head>
+<body>
+
+<div id="header">
+</div>
+
+<div id="wrapper">
+    <div id="container">
+        <div id="problem"></div>
+        <div id="working"></div>
+    </div>
+</div>
+
+<div id="footer">
+    <p>Owned by CSIRO.... etc.</p>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="../scriptsShared/utils.js" type="text/javascript"></script>
+
+<script>
+
+    generateHeader();
+
+    const problem = [{'text': 'A stone is thrown from the', 'gap': 0, 'line': 0, 'interactive': false},
+                         {'text': 'top of a 10m', 'gap': 230, 'line': 0, 'interactive': true, 'datum': {'id': 'x', 'val': 10}},
+                         {'text': 'high cliff above the sea at an', 'gap': 342, 'line': 0, 'interactive': false},
+                         {'text': 'angle of 45°', 'gap': 585, 'line': 0, 'interactive': true, 'datum': {'id': 'angle', 'val': 45}},
+                         {'text': 'to the horizontal. It has an', 'gap': 0, 'line': 1, 'interactive': false},
+                         {'text': 'initial speed of 20m/s.', 'gap': 226, 'line': 1, 'interactive': true, 'datum': {'id': 'u', 'val': 20}}];
+    const scalingFactor = 10;
+
+
+
+    d3.select('div#problem').append('svg')
+        .attr('width', 700)
+        .attr('height', 130)
+        .attr('overflow', 'hidden')
+        .attr('id', 'problemSvg');
+
+    d3.select('#problemSvg').selectAll('text')
+        .data(problem)
+        .enter().append('text')
+        .attr('x', function (d) {return d.gap; })
+        .attr('y', function (d) {return d.line*40 + 60; })
+        .text(function (d) {return d.text; })
+        .classed('clickable', function (d) {return d.interactive; })
+        .datum(function (d) {return d.interactive ? d.datum : 0});
+
+    d3.select('#problemSvg').selectAll('.clickable')
+        .on('click', clickProblem);
+
+    initSvg();
+
+    const ballR = 20;
+    d3.select('#workingSvg').append('g')
+        .attr('transform', 'translate(' + 40 + ',' + (d3.select('#workingSvg').attr('height')-ballR) + ')')
+        .attr('id', 'frame');
+
+    d3.select('#frame').append('g')
+        .attr('id', 'ballG');
+
+    d3.select('#ballG').append('circle')
+        .attr('r', ballR)
+        .attr('id', 'ball');
+
+    d3.select('#ballG').append('g')
+        .attr('id', 'velocityArrowG');
+
+    d3.select('#velocityArrowG').append('line')
+        .attr('x2', 100)
+        .attr('id', 'velocityArrow')
+        .classed('split', true)
+        .classed('splitLine', true);
+
+    d3.select('#velocityArrowG').append('g')
+        .attr('transform', 'translate(' + 100 + ',0)')
+        .attr('id', 'velocityArrowHead')
+        .selectAll('line')
+        .data(d3.range(2))
+        .enter().append('line')
+        .attr('x2', -10)
+        .attr('y2', function (d) {return (d ? -1 : 1) * 10; })
+        .classed('split', true);
+
+
+    function initSvg () {
+        const height = 600;
+        const animationWidth = 700;
+        d3.select('div#working').append('svg')
+            .attr('width', animationWidth)
+            .attr('height', height)
+            .attr('overflow', 'hidden')
+            .attr('id', 'workingSvg')
+            .style('border', 'solid black 1px');
+    }
+
+    function clickProblem() {
+        var datum = d3.select(this).datum();
+        if (datum.id == 'x') {
+            d3.select('#ballG').attr('transform', 'translate(0,' + (-datum.val*scalingFactor) + ')');
+        } else if (datum.id == 'angle') {
+            d3.select('#velocityArrowG').attr('transform', 'rotate(' + (-datum.val) + ')');
+            d3.select('#velocityArrow')
+                .classed('split', false)
+                .classed('splitLine', false);
+            d3.select('#velocityArrowHead').selectAll('line').classed('split', false);
+        } else if (datum.id == 'u') {
+            d3.select('#velocityArrow')
+                .attr('x2', datum.val*scalingFactor)
+                .classed('split', false)
+                .classed('splitLine', false);
+            d3.select('#velocityArrowHead')
+                .attr('transform', 'translate(' + (datum.val*scalingFactor) + ',0)')
+                .selectAll('line')
+                .classed('split', false);
+        }
+        d3.select(this).classed('shadow2', true);
+    }
+
+
+</script>
+
+</body>
+</html>

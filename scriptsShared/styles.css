@@ -8,7 +8,7 @@ line {
     stroke-width: 2px;
 }
 
-text {
+text, p, h2 {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -22,20 +22,25 @@ text {
     font-weight: bold;
     fill: #000;
     float:left;
-    padding: 5px 0;
     min-width: 100%;
 }
 
 #header {
-    cursor: pointer;
+    padding: 10px 0;
 }
 
-#header h1 {
-    font-size: 45px;
+#footer {
+    padding: 5px 0;
 }
 
 #footer p {
     font-size: 10px;
+    font-weight: normal;
+}
+
+#container p {
+    font-size: 14px;
+    font-weight: normal;
 }
 
 #wrapper {
